@@ -1,6 +1,11 @@
 # CSS
 
- ## CSS Organization
+## Next
+
+* Add my tips
+* Add bookmarks
+
+## CSS Organization
 
 
 * CSS are split into three sections
