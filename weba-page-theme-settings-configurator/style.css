@@ -1,24 +1,29 @@
 /* copyright pushMe-pullYou authors. MIT license.
 
+See: https://github.com/pushme-pullyou/simple-web-programs/blob/master/css-cascading-style-sheets/css.md
+
 */
 
 :root {
+	--background-color: #fff;
 	--red-hue: 360;
 	--blue-hue: 240;
 	--green-hue: 120;
 	--main-hue: var(--red-hue);
 	--saturation: 50%;
 	--mnu-width: 22rem;
+
 	font: 1rem monospace;
 }
 * {
-	margin: 0;
 	box-sizing: border-box;
+	margin: 0;
 }
 html {
 	height: 100%;
 }
 body {
+	background-color: var( --background-color );
 	color: hsl(var(--main-hue), var(--saturation), var(--lightness1));
 	display: flex;
 	flex-direction: column;
@@ -30,10 +35,6 @@ a {
 	font-weight: 800;
 	text-decoration: underline;
 }
-h1 a {
-	color: hsl(var(--main-hue), var(--saturation), var(--lightness2));
-}
-
 a:hover,
 a:focus,
 a:active {
@@ -41,6 +42,11 @@ a:active {
 	color: hsl(var(--main-hue), var(--saturation), var(--lightness2));
 	text-decoration: underline;
 }
+
+h1 a {
+	color: hsl(var(--main-hue), var(--saturation), var(--lightness2));
+}
+
 
 option:nth-child(odd) {
 	background-color: hsl(var(--main-hue), var(--saturation), var(--lightness5));
@@ -62,7 +68,10 @@ code {
 	margin: 1rem;
 	padding: 0.5rem 1rem;
 }
-
+dialog {
+	margin: auto;
+	top:40vh;
+}
 button {
 	background-color: hsl(var(--main-hue), var(--saturation), var(--lightness4));
 	box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
@@ -75,6 +84,18 @@ button {
 button:hover {
 	background: #ccc;
 	color: #fff;
+}
+
+input {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	background-color: hsl(var(--main-hue), var(--saturation), var(--lightness4));
+	border-color: hsl(var(--main-hue), var(--saturation), var(--lightness3));
+	border-style: solid;
+	border-width: 1px;
+	height: 3ch;
+	padding: 0.5ch, 1ch;
+	width: 100%;
 }
 
 input[type="range"] {
@@ -127,7 +148,6 @@ input[type="range"]::-moz-range-thumb {
 }
 input[type="range"]::-webkit-slider-thumb {
 	-webkit-appearance: none;
-
 	background-color: hsl(var(--main-hue), var(--saturation), var(--lightness3));
 	height: 3ch;
 	width: 1.7ch;
@@ -172,7 +192,6 @@ main section {
 	margin: 0;
 	overflow: auto;
 	position: absolute;
-	top: 0;
 	transition: left 0.5s;
 	width: var(--mnu-width);
 }
@@ -219,10 +238,11 @@ nav h3 {
 }
 
 #navExpand {
+	top: 2rem;
 	height: 32px;
 	position: absolute;
 	left: var(--mnu-width);
-	top: 1rem;
+	/* top: 1rem; */
 	transition: left 0.5s;
 	width: 32px;
 	z-index: 1;
@@ -236,13 +256,10 @@ nav h3 {
 #navSource {
 	position: absolute;
 	bottom: 20px;
-	height: 50px;
 	right: 20px;
-	padding: 8px;
 	color: #fff;
-	background-color: #555;
 	opacity: 0.7;
-	width: 150px;
+
 }
 
 .nav-source__button:hover {
@@ -250,87 +267,44 @@ nav h3 {
 	opacity: 1;
 }
 
-/* Popup */
-
-.attributeTitle {
-	font-style: italic;
-}
-
-.attributeValue {
-	color: blue;
-}
-
-#navDragMove {
-	background-color: #f1f1f1;
-	border: 1px solid #aaa;
-	box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 5px 15px 0 rgba(0, 0, 0, 0.12);
-	max-height: 90vh;
-	max-width: 30vw;
-	overflow: auto;
-	position: fixed;
-	resize: both;
-	right: 1rem;
-	top: 1rem;
-}
-
-#secDragMove {
-	border: 0px solid green;
-	margin-bottom: 0.5rem;
-}
-
-#divDragMoveHeader {
-	background-color: var(--color);
-	color: #fff;
-	cursor: move;
-	opacity: 1;
-	padding: 0.5rem;
-}
-
-#divDragMoveContent {
-	height: 80%;
-	overflow: auto;
-	padding: 0.5rem 0.5rem 0 0.5rem;
-}
-
-#divDragMoveFooter {
-	font-size: 0.8em;
-	border: 0px solid red;
-	padding: 0.5rem 0.5rem 0 0.5rem;
-}
 
 /* media */
 
 @media all and (max-width: 640px) {
-	#divContents {
+	#main {
 		left: 0;
 		padding: 0 1rem;
 		width: 100%;
 	}
 
-	#expandButton {
-		bottom: 1rem;
+	#navExpand {
+		top: 90vh
 	}
 }
 
 @media all and (max-height: 640px) {
-	#divContents {
+	#main {
 		left: 0;
 		padding: 0;
 		width: 100%;
 	}
 
-	#expandButton {
-		bottom: 1rem;
+	#navExpand {
+		top: 90vh;
 	}
 }
 
 @media (prefers-color-scheme: dark) {
 	:root {
 		--background-color: #1e1f23;
-		--secondary-color: #235528;
+
 		--text-dark: #efefef;
 		--text: #c4c5c9;
 		--text-light: #6c6d71;
 		--text-lighter: #8e8f93;
+	}
+	* {
+
+		--lightness5: 10%;
 	}
 }

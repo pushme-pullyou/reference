@@ -1,14 +1,16 @@
 let TTT = {};
 
 TTT.getTTTdivMenuThemeSettings = function () {
+
 	htm = `
+
 	<details class=details__primary open>
 
 	<summary class=summary__primary >Settings menu</summary>
 
 	<details class=details__secondary open>
 
-		<summary class=summary__secondary >theme</summary>
+		<summary class=summary__secondary >theme colors</summary>
 
 		<p>
 			<button id="btnRed" class=button >red</button>
