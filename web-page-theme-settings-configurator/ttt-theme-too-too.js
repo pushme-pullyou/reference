@@ -1,7 +1,6 @@
 let TTT = {};
 
-TTT.getTTTdivMenuThemeSettings = function () {
-
+TTT.getTTTdivMenuThemeSettings = function() {
 	htm = `
 
 	<details class=details__primary open>
@@ -50,19 +49,15 @@ TTT.getTTTdivMenuThemeSettings = function () {
 	</details>
 	`;
 
-
 	return htm;
-
 };
 
-
-TTT.initialize = function () {
-
-	const txt = localStorage.getItem( "theme" ) || "[]";
-	const theme = JSON.parse( txt ).forEach( item => {
-		const key = Object.keys( item )[ 0 ];
-		const input = ( document.querySelectorAll( "#" + key )[ 0 ].value = item[ key ] );
-	} );
+TTT.initialize = function() {
+	const txt = localStorage.getItem("theme") || "[]";
+	const theme = JSON.parse(txt).forEach(item => {
+		const key = Object.keys(item)[0];
+		const input = (document.querySelectorAll("#" + key)[0].value = item[key]);
+	});
 
 	TTT.onInput();
 
@@ -83,54 +78,27 @@ TTT.initialize = function () {
 		TTT.resetValues();
 		TTT.onInput();
 	};
-}
+};
 
-
-
-TTT.resetValues = function () {
-
+TTT.resetValues = function() {
 	inpSaturation.value = 50;
 	inpLightness1.value = 20;
 	inpLightness2.value = 30;
 	inpLightness3.value = 50;
 	inpLightness4.value = 80;
 	inpLightness5.value = 98;
+};
 
-}
+TTT.onInput = function() {
+	document.documentElement.style.setProperty("--main-hue", 3.6 * parseFloat(inpHue.value));
+	document.documentElement.style.setProperty("--saturation", inpSaturation.value + "%");
+	document.documentElement.style.setProperty("--lightness1", inpLightness1.value + "%");
+	document.documentElement.style.setProperty("--lightness2", inpLightness2.value + "%");
+	document.documentElement.style.setProperty("--lightness3", inpLightness3.value + "%");
+	document.documentElement.style.setProperty("--lightness4", inpLightness4.value + "%");
+	document.documentElement.style.setProperty("--lightness5", inpLightness5.value + "%");
 
-
-TTT.onInput = function () {
-
-	document.documentElement.style.setProperty(
-		"--main-hue",
-		3.6 * parseFloat( inpHue.value )
-	);
-	document.documentElement.style.setProperty(
-		"--saturation",
-		inpSaturation.value + "%"
-	);
-	document.documentElement.style.setProperty(
-		"--lightness1",
-		inpLightness1.value + "%"
-	);
-	document.documentElement.style.setProperty(
-		"--lightness2",
-		inpLightness2.value + "%"
-	);
-	document.documentElement.style.setProperty(
-		"--lightness3",
-		inpLightness3.value + "%"
-	);
-	document.documentElement.style.setProperty(
-		"--lightness4",
-		inpLightness4.value + "%"
-	);
-	document.documentElement.style.setProperty(
-		"--lightness5",
-		inpLightness5.value + "%"
-	);
-
-	outHue.innerHTML = ( 3.6 * inpHue.value ).toFixed();
+	outHue.innerHTML = (3.6 * inpHue.value).toFixed();
 	outSaturation.innerHTML = inpSaturation.value + "%";
 	outLightness1.innerHTML = inpLightness1.value + "%";
 	outLightness2.innerHTML = inpLightness2.value + "%";
@@ -139,17 +107,13 @@ TTT.onInput = function () {
 	outLightness5.innerHTML = inpLightness5.value + "%";
 
 	TTT.setStorageHsl();
+};
 
-}
+TTT.setStorageHsl = function() {
+	const inputs = Array.from(document.querySelectorAll("details p input"));
+	const theme = inputs.map(item => {
+		return JSON.parse(`{ "${item.id}": ${item.value} }`);
+	});
 
-
-
-TTT.setStorageHsl = function () {
-
-	const inputs = Array.from( document.querySelectorAll( "details p input" ) );
-	const theme = inputs.map( item => {
-		return JSON.parse( `{ "${ item.id }": ${ item.value } }` );
-	} );
-
-	localStorage.setItem( "theme", JSON.stringify( theme ) );
-}
+	localStorage.setItem("theme", JSON.stringify(theme));
+};
